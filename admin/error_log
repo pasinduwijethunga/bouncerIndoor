@@ -1,0 +1,2 @@
+[24-Aug-2020 16:54:27 UTC] PHP Notice:  session_start(): A session had already been started - ignoring in /home/getanything/public_html/test/engrave/admin/header.php on line 2
+[24-Aug-2020 16:58:06 UTC] PHP Notice:  session_start(): A session had already been started - ignoring in /home/getanything/public_html/test/engrave/admin/header.php on line 2
