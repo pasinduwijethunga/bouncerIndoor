@@ -1,0 +1,16 @@
+bookings 
+  add bookings
+  update bookings
+  
+  
+ billis prints
+ 
+ daily income displaly
+ monthly income display
+ 
+ daily and  monthly bookings display
+ 
+ add members 
+ display members
+ 
+  

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<body style="background-color: black;">
+<body>
 <br>
 <br>
 <br>
@@ -134,7 +134,7 @@
         <i class="btn-curve"></i>
         <span class="btn-title">Submit</span>
     </button>
-        <button type="button" onclick="registrationClient()" class="btn btn-primary">Submit</button>
+       
 <!--    </form>-->
 </div>
 <br>
