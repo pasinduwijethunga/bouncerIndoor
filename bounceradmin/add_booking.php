@@ -1,3 +1,4 @@
+<?php include 'db/dbConnection.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,23 @@
 	
 	<!-- Fonts and icons -->
 	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
+
+	<!--   Core JS Files   -->
+	<script src="assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="assets/js/core/popper.min.js"></script>
+	<script src="assets/js/core/bootstrap.min.js"></script>
+	<!-- jQuery UI -->
+	<script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+	<!-- Atlantis JS -->
+	<script src="assets/js/atlantis.min.js"></script>
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="assets/js/setting-demo2.js"></script>
+	<script src="assets/js/add_booking.js"></script>
+
 	<script>
 		WebFont.load({
 			google: {"families":["Lato:300,400,700,900"]},
@@ -95,25 +113,35 @@
 												
 												<div class="form-group">
                                                     <label for="">Select Indoor Or Outdoor</label>
-                                                    <select class="form-control" id="cateselect" name="txt_cat" >
-                                                        <option disabled selected hidden>Select Indoor Or Outdoor</option>
-                                                        </select>
+                                                    <select class="form-control" id="doorsId" name="txt_cat" onchange="loadOptionTypes(this.value)" >
+                                                        <option>Select Indoor Or Outdoor</option>
+														<?php 
+															 $sql="SELECT bt.id,bt.type FROM booking_types bt WHERE bt.status=1 and bt.optionId=1";
+															 $result = mysqli_query($connection,$sql);
+
+															 while($row = mysqli_fetch_object($result)){
+																 ?>
+																	<option value="<?php echo $row->id ?>" ><?php echo $row->type ?></option>
+																 <?php 
+															 }
+														?>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">Select Machine Or Normal</label>
-                                                    <select class="form-control" id="cateselect" name="txt_cat" >
+                                                    <select class="form-control" id="machineNormalId" name="txt_cat" onchange="loadOperators(this.value)" >
                                                         <option disabled selected hidden>Select Machine Or Normal</option>
-                                                        </select>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">Select Tutf Or Matting</label>
-                                                    <select class="form-control" id="cateselect" name="txt_cat" >
+                                                    <select class="form-control" id="wicketsId" name="txt_cat" >
                                                         <option disabled selected hidden>Select Tutf Or Matting</option>
                                                         </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">Select Operater</label>
-                                                    <select class="form-control" id="cateselect" name="txt_cat" >
+                                                    <select class="form-control" id="operatorId" name="txt_cat" >
                                                         <option disabled selected hidden>Select With Or Without</option>
                                                         </select>
                                                 </div>
@@ -151,19 +179,5 @@
 		<?php include('rightSidebar.php');?>
 		<!-- End Custom template -->
 	</div>
-	<!--   Core JS Files   -->
-	<script src="assets/js/core/jquery.3.2.1.min.js"></script>
-	<script src="assets/js/core/popper.min.js"></script>
-	<script src="assets/js/core/bootstrap.min.js"></script>
-	<!-- jQuery UI -->
-	<script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-	<script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
-
-	<!-- jQuery Scrollbar -->
-	<script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-	<!-- Atlantis JS -->
-	<script src="assets/js/atlantis.min.js"></script>
-	<!-- Atlantis DEMO methods, don't include it in your project! -->
-	<script src="assets/js/setting-demo2.js"></script>
 </body>
 </html>

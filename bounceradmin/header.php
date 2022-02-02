@@ -99,78 +99,7 @@
                         <span class="notification" id="notifi"></span>
                     </a>
                     <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
-                        <li>
-                            <div class="notif-scroll scrollbar-outer">
-                                <div class="notif-center">
-                                <?php
-
-                                $x = 0;
-
-                                $sql="SELECT * FROM stock_tbl,products_tbl,location_tbl,batch_tbl WHERE products_tbl.pro_id = stock_tbl.pro_id AND location_tbl.loc_id = stock_tbl.stock_location AND batch_tbl.batch_id = stock_tbl.batch_id";
-                                $result = mysqli_query($connection,$sql);
-
-                                while($dataRow=mysqli_fetch_assoc($result)){
-                                    $stQty = $dataRow['stock_qty'];
-                                    $alQty = $dataRow['pro_all_qty'];
-                                    $proName = $dataRow['pro_name'];
-                                    $barcode = $dataRow['pro_code'];
-                                if ($stQty <= $alQty) {
-                                    ++$x ; ?>
-
-                                    <script>
-                                        document.getElementById("notifi").textContent = <?php echo $x; ?>;
-                                    </script>
-
-                                    <a href="stock-reorder-level.php">
-                                        <div class="notif-icon notif-danger"> <i class="fas fa-exclamation"></i> </div>
-                                        <div class="notif-content">
-                                            <span class="block">
-                                            <?php echo $proName; ?> <?php echo "("; ?><?php echo $barcode; ?><?php echo ")"; ?> quantity is <?php echo $stQty; ?>
-                                            </span>
-                                            <span class="time">Please Check Stock</span>
-                                        </div>
-                                    </a>
-
-                                    <?php }
-                                } ?>
-
-                                <!-- -------------------------- -->
-                                <?php
-
-                                $sql="SELECT * FROM main_transfer_tbl,location_tbl WHERE location_tbl.loc_id = main_transfer_tbl.trans_loc";
-                                $result = mysqli_query($connection,$sql);
-
-                                while($dataRow=mysqli_fetch_assoc($result)){
-                                    $view = $dataRow['view'];
-                                if ($view == 0) {
-                                    ++$x ; ?>
-
-                                    <script>
-                                        document.getElementById("notifi").textContent = <?php echo $x; ?>;
-                                    </script>
-
-                                    <a href="transfer-note.php">
-                                        <div class="notif-icon notif-success"> <i class="fas fa-check-double"></i> </div>
-                                        <div class="notif-content">
-                                            <span class="block">
-                                            Products Accepted - <?php echo $dataRow['loc_name']; ?> branch
-                                            </span>
-                                            <span class="time">Please Check</span>
-                                        </div>
-                                    </a>
-
-                                    <?php }
-                                } ?>
-
-                                <script>
-                                    if (<?php echo $x; ?> === 0) {
-                                        document.getElementById("notifi").style.display = "none";
-                                    }
-                                </script>
-                                
-                                </div>
-                            </div>
-                        </li>
+                        
                         <!-- <li>
                             <a class="see-all" href="stock-reorder-level.php">See all notifications<i
                                     class="fa fa-angle-right"></i> </a>
