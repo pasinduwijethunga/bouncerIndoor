@@ -26,6 +26,9 @@
 	<script src="assets/js/setting-demo2.js"></script>
 	<script src="assets/js/add_booking.js"></script>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
 	<script>
 		WebFont.load({
 			google: {"families":["Lato:300,400,700,900"]},
@@ -78,7 +81,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<form action="" method="post" enctype="multipart/form-data">
+							<form action="" method="post" id="bookingForm" enctype="multipart/form-data">
 								<div class="card">
 									<!-- <div class="card-header">
 										<div class="card-title">Form Elements</div>
@@ -88,24 +91,42 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="">Book No</label>
-													<input type="text" class="form-control" id="" name="txt_no" placeholder="Enter Book Number">
+													<input type="text" class="form-control" id="orderNo" name="orderNo" placeholder="Enter Book Number" required>
 													
 												</div>
 												<div class="form-group">
 													<label for="">Book Date</label>
-													<input type="Date" class="form-control" id="date" name="txt_date" placeholder="Enter Email Address">
+													<input type="Date" class="form-control" id="bookDate" name="bookDate" placeholder="Enter Email Address" required>
+												</div>
+												<div class="row">
+													<div class="col-6 col-md-6">
+														<div class="form-group">
+															<label for="">Book From</label>
+															<input type="Time" class="form-control" id="bookFrom" name="bookFrom" required>
+														</div>
+													</div>
+													<div class="col-6 col-md-6">
+														<div class="form-group">
+															<label for="">Book To</label>
+															<input type="Time" class="form-control" id="bookTo" name="bookTo" required>
+														</div>
+													</div>
 												</div>
 												<div class="form-group">
-													<label for="">Book Time</label>
-													<input type="Time" class="form-control" id="" name="txt_no" placeholder="Enter Customer Name">
+													<label for="">Name</label>
+													<input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" required>
 												</div>
 												<div class="form-group">
 													<label for="">Email Address</label>
-													<input type="email" class="form-control" id="email" name="txt_email" placeholder="Enter Email Address">
+													<input type="email" class="form-control" id="email" name="email" placeholder="Enter Email Address" required>
 												</div>
 												<div class="form-group">
-													<label for="">Person ID Number</label>
-													<input type="text" class="form-control" id="" name="txt_phone" placeholder="Enter Phone Number">
+													<label for="">Mobile </label>
+													<input type="number" class="form-control" id="mobile" name="mobile" placeholder="Enter Mobile" required>
+												</div>
+												<div class="form-group">
+													<label for="">Nic</label>
+													<input type="text" class="form-control" id="nic" name="nic" placeholder="Enter NIC" required>
 												</div>
 												
 											</div>
@@ -113,8 +134,8 @@
 												
 												<div class="form-group">
                                                     <label for="">Select Indoor Or Outdoor</label>
-                                                    <select class="form-control" id="doorsId" name="txt_cat" onchange="loadOptionTypes(this.value)" >
-                                                        <option>Select Indoor Or Outdoor</option>
+                                                    <select class="form-control" id="doorsId" name="doorsId" onchange="loadOptionTypes(this.value)" required >
+                                                        <option  selected value="" >Select Indoor Or Outdoor</option>
 														<?php 
 															 $sql="SELECT bt.id,bt.type FROM booking_types bt WHERE bt.status=1 and bt.optionId=1";
 															 $result = mysqli_query($connection,$sql);
@@ -127,22 +148,22 @@
 														?>
                                                     </select>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group mn">
                                                     <label for="">Select Machine Or Normal</label>
-                                                    <select class="form-control" id="machineNormalId" name="txt_cat" onchange="loadOperators(this.value)" >
-                                                        <option disabled selected hidden>Select Machine Or Normal</option>
+                                                    <select class="form-control" id="machineNormalId" name="machineNormalId" onchange="loadOperators(this.value)" required>
+                                                        <option selected hidden value="" >Select Machine Or Normal</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group tm">
                                                     <label for="">Select Tutf Or Matting</label>
-                                                    <select class="form-control" id="wicketsId" name="txt_cat" >
-                                                        <option disabled selected hidden>Select Tutf Or Matting</option>
+                                                    <select class="form-control" id="wicketsId" name="wicketsId" required >
+                                                        <option selected hidden value="" >Select Tutf Or Matting</option>
                                                         </select>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group opr">
                                                     <label for="">Select Operater</label>
-                                                    <select class="form-control" id="operatorId" name="txt_cat" >
-                                                        <option disabled selected hidden>Select With Or Without</option>
+                                                    <select class="form-control" id="operatorId" name="operatorId" required>
+                                                        <option selected hidden value="" >Select With Or Without</option>
                                                         </select>
                                                 </div>
 												
@@ -151,7 +172,7 @@
 										</div>
 									</div>
 									<div class="card-action">
-										<button class="btn btn-primary" type="submit">
+										<button class="btn btn-primary" type="button" onclick="placeBooking()">
 											<span class="btn-label">
 												<i class="fa fa-check"></i>
 											</span>
