@@ -1,4 +1,6 @@
-<?php include 'db/dbConnection.php'; ?>
+<?php 
+	include 'db/dbConnection.php'; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,9 +81,15 @@
 						<h4 class="page-title">ADD BOOKING</h4>
 						
 					</div>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<strong><?php echo $_SESSION['msg']; ?></strong>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<form action="" method="post" id="bookingForm" enctype="multipart/form-data">
+							<form action="placedBooking.php" method="post" id="bookingForm" enctype="multipart/form-data" >
 								<div class="card">
 									<!-- <div class="card-header">
 										<div class="card-title">Form Elements</div>
@@ -172,7 +180,7 @@
 										</div>
 									</div>
 									<div class="card-action">
-										<button class="btn btn-primary" type="button" onclick="placeBooking()">
+										<button class="btn btn-primary" type="submit" onclick="placedBooking()" >
 											<span class="btn-label">
 												<i class="fa fa-check"></i>
 											</span>

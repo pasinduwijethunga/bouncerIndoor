@@ -21,7 +21,16 @@ $(document).ready(function () {
             }
         }
     });
+
+    setTimeout((hideDiv),5000)
+   
 })
+
+function hideDiv(){
+    $('.alert').css('display','none')
+}
+
+
 
 function loadOptionTypes(id){
     if(id == 1){ // Indoor
@@ -106,9 +115,10 @@ function loadOperators(id){
     })
 }
 
-function placeBooking(){
-    var bookDate = $('#bookDate').val();
-    var bookFrom = $('#bookFrom').val();
-    var bookTo = $('#bookTo').val();
+function placedBooking(){
     $('#bookingForm').submit();
+    // $('#bookingForm').submit(function(e){
+    //     // var bookDate = $('#bookDate').val();
+    //     alert("checking");
+    // })
 }
