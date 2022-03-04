@@ -27,8 +27,11 @@
     });
     </script>
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"> -->
     <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/atlantis.min.css">
@@ -48,7 +51,7 @@
             <div class="content">
                 <div class="page-inner">
                     <div class="page-header">
-                        <h4 class="page-title">DAILY BOOKINGS - <?php echo date('yy-m-d');?></h4>
+                        <h4 class="page-title">DAILY BOOKINGS - <?php echo date('Y-m-d');?></h4>
                         <ul class="breadcrumbs">
                             <li class="nav-home">
                                 <a href="index.php">
@@ -78,7 +81,7 @@
                                 
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table id="example" class="display table table-striped table-hover">
+                                        <table id="example" class="display nowrap table table-striped table-hover" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th>Booking No.</th>
@@ -88,6 +91,7 @@
                                                     <th>Custommer Name</th>
                                                     <th>Custommer Email</th>
                                                     <th>Custommer ID No.</th>
+                                                    <th>Doors</th>
                                                     <th>Wickets</th>
                                                     <th>Machine OR Normal</th>
                                                     <th>Operator</th>
@@ -96,10 +100,10 @@
                                                     <th>Delete</th>
                                                     <th>Cancel</th>
                                                     <th>Print Bill</th>
-                                                    
-                                                    <!-- <th>sdfs</th> -->
                                                 </tr>
                                             </thead>
+                                            <tbody id="bookingData">
+                                            </tbody>
                                             <tfoot>
                                                 <tr>
                                                     <th>Booking No.</th>
@@ -109,21 +113,17 @@
                                                     <th>Custommer Name</th>
                                                     <th>Custommer Email</th>
                                                     <th>Custommer ID No.</th>
+                                                    <th>Doors</th>
                                                     <th>Wickets</th>
                                                     <th>Machine OR Normal</th>
                                                     <th>Operator</th>
+                                                    <th>Amount</th>
                                                     <th>Edit</th>
                                                     <th>Delete</th>
                                                     <th>Cancel</th>
                                                     <th>Print Bill</th>
-                                                    <!-- <th>fsdf</th> -->
                                                 </tr>
                                             </tfoot>
-                                            <tbody id="tbody">
-                                                <?php
-
-											?>
-                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -144,54 +144,38 @@
 
 
     <script>
-    function reportByCustomer() {
-        var customer = document.getElementById("selectCus").value;
-        window.location.href = "sales-report.php?cus=" + customer;
-    }
-
-    function reportByUser() {
-        var users = document.getElementById("selectUser").value;
-        window.location.href = "sales-report.php?user=" + users;
-    }
-
-    function handler() {
-        if (event.key === 'Enter') {
-            var date = document.getElementById("date").value;
-            window.location.href = "sales-report.php?date=" + date;
-        }
-    }
-
-    // function getsubcat() {
-    //
-    //     var catid = document.getElementById('cateselect').value;
-    //     xmlhttp = new XMLHttpRequest();
-    //
-    //     xmlhttp.onreadystatechange = function() {
-    //         if (this.readyState == 4 && xmlhttp.status == 200) {
-    //             var respons = xmlhttp.responseText.trim();
-    //             document.getElementById('subcateselect').innerHTML = this.responseText;
-    //
-    //         }
-    //     }
-    //     xmlhttp.open("GET", "ajax/get-subcategory.php?catid=" + catid, true);
-    //     xmlhttp.send();
+    // function reportByCustomer() {
+    //     var customer = document.getElementById("selectCus").value;
+    //     window.location.href = "sales-report.php?cus=" + customer;
     // }
 
-    function pageReload() {
-        var locationId=document.getElementById("txt_locaId").value;
-        xmlhttp =new XMLHttpRequest();
+    // function reportByUser() {
+    //     var users = document.getElementById("selectUser").value;
+    //     window.location.href = "sales-report.php?user=" + users;
+    // }
 
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && xmlhttp.status == 200){
-                var responce=xmlhttp.responseText.trim();
-                document.getElementById("tbody").innerHTML= this.responseText;
-                // alert(responce);
+    // function handler() {
+    //     if (event.key === 'Enter') {
+    //         var date = document.getElementById("date").value;
+    //         window.location.href = "sales-report.php?date=" + date;
+    //     }
+    // }
 
-            }
-        }
-        xmlhttp.open("GET","ajax/get-daily-sals.php?locationId=" + locationId, true);
-        xmlhttp.send();
-    }
+    // function pageReload() {
+    //     var locationId=document.getElementById("txt_locaId").value;
+    //     xmlhttp =new XMLHttpRequest();
+
+    //     xmlhttp.onreadystatechange = function () {
+    //         if (this.readyState == 4 && xmlhttp.status == 200){
+    //             var responce=xmlhttp.responseText.trim();
+    //             document.getElementById("tbody").innerHTML= this.responseText;
+    //             // alert(this.responseText);
+
+    //         }
+    //     }
+    //     xmlhttp.open("GET","ajax/get_booking.php", true);
+    //     xmlhttp.send();
+    // }
     </script>
 
     <!--   Core JS Files   -->
@@ -211,23 +195,93 @@
     <!-- Atlantis DEMO methods, don't include it in your project! -->
     <script src="assets/js/setting-demo2.js"></script>
 
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script> -->
 
     <script>
+    // var data = [
+    //     [
+    //         "Tiger Nixon",
+    //         "System Architect",
+    //         "Edinburgh",
+    //         "5421",
+    //         "2011/04/25",
+    //         "$3,120"
+    //     ],
+    //     [
+    //         "Garrett Winters",
+    //         "Director",
+    //         "Edinburgh",
+    //         "8422",
+    //         "2011/07/25",
+    //         "$5,300"
+    //     ]
+    // ]
+
     $(document).ready(function() {
-        $('#example').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
+         loadBookingData();
     });
+    
+    function loadBookingData(){
+        // var table = $("#example tbody");
+        $.ajax({
+            url:'ajax/get_booking.php',
+            type:'GET',
+            data:{},
+            success:function(data){
+                var result = JSON.parse(data);
+                console.log(data);
+                $.each(result,function (index,res){
+                    $('#bookingData').append('<tr>'
+                            +'<td>'+res.orderNo+'</td>'
+                            +'<td>'+res.orderDate+'</td>'
+                            +'<td>'+res.bookStartTime+'</td>'
+                            +'<td>'+res.bookEndTime+'</td>'
+                            +'<td>'+res.clientName+'</td>'
+                            +'<td>'+res.clientEmail+'</td>'
+                            +'<td>'+res.clientEmail+'</td>'
+                            +'<td>'+res.doors+'</td>'
+                            +'<td>'+res.wickets+'</td>'
+                            +'<td>'+res.machineNormal+'</td>'
+                            +'<td>'+res.operator+'</td>'
+                            +'<td>'+res.operator+'</td>'
+                            +'<td>'+res.url+'</td>'
+                            +'</tr>')
+                })
+
+                $('#example').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ],
+                    data : result,
+                    columns:[
+                        {data : "orderNo"},
+                        {data : "orderDate"},
+                        {data : "bookStartTime"},
+                        {data : "bookEndTime"},
+                        {data : "clientName"},
+                        {data : "clientEmail"},
+                        {data : "clientEmail"},
+                        {data : "doors"},
+                        {data : "wickets","defaultContent": "<i>Not set</i>"},
+                        {data : "machineNormal"},
+                        {data : "operator"},
+                        {data : "operator"},
+                        {data : "url"}
+                    ],
+                    "order": [[1, 'asc']]
+                });
+            }
+        });
+       
+    }
+   
     </script>
 
 </body>
